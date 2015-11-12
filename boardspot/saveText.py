@@ -14,6 +14,7 @@ for line in range(0, 50):
 	url = url.strip("abcdefghijklmnopqrstuvwxyz.:/-")
 
 	gamename = soup.find("meta", {"name":"title"})['content']
+	gamename = gamename.replace(" ", "_")
 
 	number = url.split('/')[0]	
 	numofplayers = soup.find("div", {"id":"results_players_thing_" + number}).text
