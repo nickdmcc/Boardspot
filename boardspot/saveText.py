@@ -5,6 +5,7 @@ import codecs
 import html.parser
 
 filename = open('saveHtml.txt', 'r')
+text = open('mysqlscript.txt', 'w')
 line = 0
 for line in range(0, 50):
 	url = filename.readline()	
@@ -49,4 +50,7 @@ for line in range(0, 50):
 	gamefile = number + '.txt'
 	with open(gamefile, 'w+') as f:
 		f.write(gamename +'#'+ players + '#' + ages + " and up" + '#' + time + '#' + genrename + '#' + description)
+		f.close()
+	with open('mysqlscript.txt', 'a') as f:
+		f.write("LOAD DATA LOCAL INFILE '" + number + ".txt' INTO TABLE game FIELDS TERMINATED BY '#';" + '\n')
 		f.close()
