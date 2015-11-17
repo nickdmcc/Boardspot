@@ -12,10 +12,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from os.path import join #added <---------------------------------------------------------------------------------
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+TEMPLATE_DIRS = (
+        join(BASE_DIR, 'templates'),          # added <-------------------------------------
+        )
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -25,7 +29,7 @@ SECRET_KEY = '5+h&x#ls&1dcgeuegpwg7xuks5y%!neck%n4!fdn9vd_y=83e#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['boardspot.pythonanywhere.com']
 
 
 # Application definition
@@ -37,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'boardspot',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,11 +60,16 @@ ROOT_URLCONF = 'boardspot.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':('Capstone/templates',
+            ),#home/boardspot
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                'dango.template.context_processors.i18n', #added
+                'dango.template.context_processors.media', #added
+                'django.template.context_processors.static',#added
+                'django.template.context_processors.tz', #added
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -76,8 +86,11 @@ WSGI_APPLICATION = 'boardspot.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'boardspot$boardsp0t', # os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USERNAME': 'boardspot',
+        'PASSWORD': 'kyleandnick',
+        'HOST': 'boardspot.mysql.pythonanywhere-services.com'
     }
 }
 

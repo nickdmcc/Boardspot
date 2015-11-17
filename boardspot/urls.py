@@ -14,8 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from . import views
 from django.contrib import admin
+from boardspot.views import get_game_name
+from django.conf.urls import patterns
 
-urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-]
+urlpatterns = patterns('',
+        (r'^(.{0,50})/$',views.get_game_name),
+        )
+#    [
+#   url(r'^admin/', include(admin.site.urls)),
+#]
